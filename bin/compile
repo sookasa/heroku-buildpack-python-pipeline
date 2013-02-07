@@ -162,6 +162,7 @@ if [ ! -d "$PWD/.gem" ]; then
 fi
 gem install sass --no-rdoc --no-ri --install-dir "$PWD/.gem" | indent
 export GEM_PATH=$GEM_PATH:$PWD/.gem
+export PATH=$PATH:$PWD/.gem/bin
 echo "       done."
 
 if [ ! -f "$BUILD_DIR/config.rb" ]; then
