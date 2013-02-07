@@ -156,7 +156,27 @@ puts-step "Installing dependencies using Pip (1.2.1)"
 pip install --use-mirrors -r requirements.txt --exists-action=w --src=./.heroku/src | cleanup | indent
 
 # install some external dependencies
-gem install sass
+echo "-----> Installing SASS..."
+if [ ! -d "$PWD/.gem" ]; then
+  mkdir $PWD/.gem
+fi
+gem install sass --no-rdoc --no-ri --install-dir "$PWD/.gem" | indent
+export GEM_PATH=$GEM_PATH:$PWD/.gem
+echo "       done."
+
+if [ ! -f "$BUILD_DIR/config.rb" ]; then
+  echo "-----> Compiling SASS..."
+  $PWD/.gem/bin/sass --update $BUILD_DIR:$BUILD_DIR | indent
+  echo "       done."
+else
+  echo "-----> Installing Compass..."
+  gem install compass --no-rdoc --no-ri --install-dir "$PWD/.gem" | indent
+  echo "       done."
+  echo "-----> Compiling Compass..."
+  $PWD/.gem/bin/compass compile $BUILD_DIR | indent
+  echo "       done."
+fi
+
 
 # Django collectstatic support.
 source $BIN_DIR/steps/collectstatic
