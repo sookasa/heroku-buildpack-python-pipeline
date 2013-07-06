@@ -16,6 +16,8 @@ fi
 if [ ! "$DISABLE_COLLECTSTATIC" ]; then
     set +e
 
+    echo "-----> Testing static files"
+
     # Check if collectstatic is configured properly.
     python $MANAGE_FILE collectstatic --dry-run --noinput &> /dev/null && RUN_COLLECTSTATIC=true
 
@@ -23,7 +25,7 @@ if [ ! "$DISABLE_COLLECTSTATIC" ]; then
     if [ "$RUN_COLLECTSTATIC" ]; then
 
         echo "-----> Collecting static files"
-        python $MANAGE_FILE collectstatic --noinput  2>&1 | sed '/^Copying/d;/^$/d;/^ /d' | indent
+        python $MANAGE_FILE collectstatic --noinput -v 3
 
         [ $? -ne 0 ] && {
             echo " !     Error running manage.py collectstatic. More info:"

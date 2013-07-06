@@ -18,6 +18,17 @@ BUILD_DIR=$1
 CACHE_DIR=$2
 
 CACHED_DIRS=".heroku"
+pushd `pwd` &> /dev/null
+
+$ROOT_DIR/node/bin/detect $BUILD_DIR
+OUT=$?
+if [ $OUT -eq 0 ];then
+   echo 'Running node.js buildpack'
+   $ROOT_DIR/node/bin/compile $BUILD_DIR $CACHE_DIR
+   source $BUILD_DIR/.profile.d/nodejs.sh
+fi
+
+popd
 
 # Static configurations for virtualenv caches.
 VIRTUALENV_LOC=".heroku/venv"
