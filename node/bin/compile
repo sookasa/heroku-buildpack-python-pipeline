@@ -177,7 +177,7 @@ export CPPPATH="$INCLUDE_PATH:$CPPPATH"
 # Handle npm's new cert bug
 # http://blog.npmjs.org/post/78085451721/npms-self-signed-certificate-is-no-more
 if [ ! -f "$BUILD_DIR/.npmrc" ]; then
-  echo "----> Writing a custom .npmrc to circumvent npm bugs"
+  echo "-----> Writing a custom .npmrc to circumvent npm bugs"
   echo "ca=" > "$BUILD_DIR/.npmrc"
 fi
 
