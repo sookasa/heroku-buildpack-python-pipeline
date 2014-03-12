@@ -225,7 +225,7 @@ echo "       done."
 
 if [ ! -f "$BUILD_DIR/config.rb" ]; then
   echo "-----> Compiling SASS..."
-  $PWD/.gem/bin/sass --update $BUILD_DIR:$BUILD_DIR | indent
+  $PWD/.gem/bin/sass --update $BUILD_DIR/dasboard:$BUILD_DIR/dasboard | indent
   echo "       done."
 else
   echo "-----> Installing Compass..."
