@@ -19,6 +19,9 @@ if [ ! "$DISABLE_COLLECTSTATIC" ]; then
     echo "-----> Testing static files"
 
     # Check if collectstatic is configured properly.
+    echo `pwd`
+    echo $ENABLE_CDN
+    echo $DJANGO_MODULE_SETTINGS
     python $MANAGE_FILE collectstatic --dry-run --noinput 
     python $MANAGE_FILE collectstatic --dry-run --noinput &> /dev/null && RUN_COLLECTSTATIC=true
 
