@@ -84,7 +84,7 @@ export_env_dir() {
   fi
 }
 
-export_env_dir $ENV_DIR "^(ENABLE_CDN|DJANGO_SETTINGS_MODULE)$"
+export_env_dir $ENV_DIR "^(ENABLE_CDN|DJANGO_SETTINGS_MODULE|METADATA_CRYPT_KEY)$"
 
 function test_pycrypto()
 {
