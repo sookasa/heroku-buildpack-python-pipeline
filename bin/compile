@@ -21,12 +21,15 @@ ENV_DIR=$3
 CACHED_DIRS=".heroku"
 pushd `pwd` &> /dev/null
 
-$ROOT_DIR/node/bin/detect $BUILD_DIR
-OUT=$?
-if [ $OUT -eq 0 ];then
-   echo 'Running node.js buildpack'
-   $ROOT_DIR/node/bin/compile $BUILD_DIR $CACHE_DIR
-   source $BUILD_DIR/.profile.d/nodejs.sh
+#$ROOT_DIR/node/bin/detect $BUILD_DIR
+#OUT=$?
+#if [ $OUT -eq 0 ];then
+#   echo 'Running node.js buildpack'
+#   $ROOT_DIR/node/bin/compile $BUILD_DIR $CACHE_DIR
+#   source $BUILD_DIR/.profile.d/nodejs.sh
+#fi
+if [ -f $BUILD_DIR/.profile.d/nodejs.sh ]; then
+    source $BUILD_DIR/.profile.d/nodejs.sh
 fi
 
 popd
